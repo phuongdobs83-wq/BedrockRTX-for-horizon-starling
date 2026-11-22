@@ -1,0 +1,619 @@
+schema = 1
+id = "bedrock_rtx"
+name = "BedrockRTX 0.2.0"
+version = "0.2.0"
+api = "0.1"
+description = "BedrockRTX 0.2.0 Fix 11 Android API 0.1: wet-surface controls grouped under Wet Surfaces mode, automatic rain/storm shadow fade and recovery, Horizon reflection-buffer reflections, water waves and God Rays."
+authors = ["BedrockRTX Project"]
+license = "MIT"
+shared = ["common.wgsl"]
+
+[sky]
+file = "sky.wgsl"
+name = "BedrockRTX Atmosphere"
+clouds = false
+sun = false
+stars = false
+
+[material]
+file = "material.wgsl"
+name = "BedrockRTX Materials and Lighting"
+fog = true
+
+[vertex]
+file = "vertex.wgsl"
+
+[shadow]
+resolution = 1024
+distance = 60.0
+option = "shadow_enabled"
+resolution_option = "shadow_resolution"
+distance_option = "shadow_distance"
+
+[reflection]
+option = "reflections_enabled"
+
+# Ask the API 0.1 shadow pass to include the Nether portal surface as translucent.
+[[materials]]
+id = 1
+blocks = ["nether_portal"]
+translucent = true
+
+[[post]]
+file = "post.wgsl"
+name = "BedrockRTX Reflections, Godrays and Color Studio"
+
+[budget]
+gpu_ms = 2.2
+
+
+[[options]]
+id = "shadow_enabled"
+name = "Shadows"
+type = "bool"
+default = true
+
+[[options]]
+id = "shadow_resolution"
+name = "Shadow Resolution"
+type = "int"
+min = 256
+max = 1024
+default = 512
+
+[[options]]
+id = "shadow_distance"
+name = "Shadow Distance"
+type = "int"
+min = 32
+max = 96
+default = 48
+
+[[options]]
+id = "shadow_strength"
+name = "Shadow Strength"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.78
+
+[[options]]
+id = "shadow_softness"
+name = "Shadow Softness"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.0
+
+[[options]]
+id = "ambient_gi"
+name = "Ambient Bounce Light"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.62
+
+[[options]]
+id = "day_brightness"
+name = "Daylight Brightness"
+type = "float"
+min = 0.7
+max = 2.0
+step = 0.05
+default = 1.25
+
+[[options]]
+id = "ambient_brightness"
+name = "Ambient Brightness"
+type = "float"
+min = 0.5
+max = 2.0
+step = 0.05
+default = 1.15
+
+[[options]]
+id = "colored_glass_lighting"
+name = "Colored Glass Lighting"
+type = "bool"
+default = true
+
+[[options]]
+id = "glass_light_strength"
+name = "Glass Color Transmission"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.72
+
+[[options]]
+id = "dynamic_light_strength"
+name = "Dynamic Light Strength"
+type = "float"
+min = 0.0
+max = 2.0
+step = 0.05
+default = 1.0
+
+[[options]]
+id = "water_reflections"
+name = "Water Reflections"
+type = "bool"
+default = true
+
+[[options]]
+id = "water_texture_enabled"
+name = "Water Texture"
+type = "bool"
+default = false
+
+[[options]]
+id = "water_reflection_strength"
+name = "Water Reflection Strength"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.72
+
+[[options]]
+id = "water_distortion"
+name = "Water Reflection Distortion"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.3
+
+[[options]]
+id = "water_waves"
+name = "Water Waves"
+type = "bool"
+default = true
+
+
+
+
+[[options]]
+id = "water_wave_height"
+name = "Wave Height"
+type = "float"
+min = 0.0
+max = 0.03
+step = 0.002
+default = 0.018
+
+[[options]]
+id = "water_wave_speed"
+name = "Wave Speed"
+type = "float"
+min = 0.0
+max = 2.0
+step = 0.05
+default = 0.55
+
+[[options]]
+id = "water_wave_scale"
+name = "Wave Scale"
+type = "float"
+min = 0.25
+max = 3.0
+step = 0.05
+default = 0.85
+
+[[options]]
+id = "reflections_enabled"
+name = "Reflections System"
+type = "bool"
+default = true
+
+[[options]]
+id = "block_reflections"
+name = "Block Reflections"
+type = "bool"
+default = true
+
+[[options]]
+id = "reflection_mode"
+name = "Reflection Mode"
+type = "choice"
+values = ["Natural", "All Blocks", "Wet Surfaces"]
+default = "Natural"
+
+[[options]]
+id = "block_reflection_strength"
+name = "Natural Metal Reflection Strength"
+type = "float"
+min = 0.0
+max = 0.5
+step = 0.025
+default = 0.24
+
+[[options]]
+id = "wet_reflection_strength"
+name = "Wet Surface Reflection Strength"
+type = "float"
+min = 0.0
+max = 0.5
+step = 0.025
+default = 0.2
+
+[[options]]
+id = "wet_reflection_roughness"
+name = "Wet Surface Roughness"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.72
+
+[[options]]
+id = "all_block_strength"
+name = "All Block Reflection Strength"
+type = "float"
+min = 0.0
+max = 0.5
+step = 0.025
+default = 0.18
+
+[[options]]
+id = "all_block_roughness"
+name = "All Block Surface Roughness"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.42
+
+[[options]]
+id = "block_reflection_quality"
+name = "All Block Reflection Quality"
+type = "choice"
+values = ["Performance", "Balanced", "High"]
+default = "Performance"
+
+[[options]]
+id = "block_reflection_distance"
+name = "Reflection Distance"
+type = "float"
+min = 2.0
+max = 12.0
+step = 0.5
+default = 7.0
+
+[[options]]
+id = "reflection_thickness"
+name = "Depth Hit Thickness"
+type = "float"
+min = 0.05
+max = 0.6
+step = 0.01
+default = 0.24
+
+[[options]]
+id = "reflection_edge_fade"
+name = "Screen Edge Fade"
+type = "float"
+min = 0.0
+max = 0.5
+step = 0.025
+default = 0.18
+
+[[options]]
+id = "godrays_enabled"
+name = "Godrays"
+type = "bool"
+default = false
+
+[[options]]
+id = "godrays_intensity"
+name = "Ray Intensity"
+type = "float"
+min = 0.0
+max = 1.5
+step = 0.05
+default = 0.48
+
+[[options]]
+id = "godrays_count"
+name = "Ray Samples"
+type = "int"
+min = 6
+max = 16
+default = 12
+
+[[options]]
+id = "godrays_length"
+name = "Ray Length"
+type = "float"
+min = 0.1
+max = 1.0
+step = 0.05
+default = 0.72
+
+[[options]]
+id = "godrays_quality"
+name = "Ray Quality"
+type = "choice"
+values = ["Performance", "Balanced", "High"]
+default = "Performance"
+
+[[options]]
+id = "night_stars"
+name = "Night Stars"
+type = "bool"
+default = true
+
+[[options]]
+id = "night_aurora"
+name = "Aurora Borealis"
+type = "bool"
+default = true
+
+[[options]]
+id = "aurora_style"
+name = "Aurora Style"
+type = "choice"
+values = ["Natural Curtains", "Discrete Arc", "Diffuse Glow", "Pulsating Bands", "Vertical Rays", "Coronal Fan", "Fantasy Spiral", "Celestial Ribbons"]
+default = "Natural Curtains"
+
+[[options]]
+id = "aurora_palette"
+name = "Aurora Color"
+type = "choice"
+values = ["Emerald Cyan Blue", "Blue Violet", "Cyan Blue", "Green Pink", "Red Gold", "Green Blue"]
+default = "Emerald Cyan Blue"
+
+[[options]]
+id = "aurora_brightness"
+name = "Aurora Brightness"
+type = "float"
+min = 0.0
+max = 2.0
+step = 0.05
+default = 1.0
+
+[[options]]
+id = "aurora_speed"
+name = "Aurora Movement Speed"
+type = "float"
+min = 0.0
+max = 1.5
+step = 0.05
+default = 0.1
+
+[[options]]
+id = "aurora_scale"
+name = "Aurora Scale"
+type = "float"
+min = 0.25
+max = 3.0
+step = 0.05
+default = 1.0
+
+[[options]]
+id = "aurora_height"
+name = "Aurora Height"
+type = "float"
+min = 0.05
+max = 0.75
+step = 0.01
+default = 0.3
+
+[[options]]
+id = "aurora_width"
+name = "Aurora Curtain Width"
+type = "float"
+min = 0.25
+max = 2.0
+step = 0.05
+default = 1.0
+
+[[options]]
+id = "aurora_detail"
+name = "Aurora Detail"
+type = "float"
+min = 0.0
+max = 2.0
+step = 0.05
+default = 0.7
+
+[[options]]
+id = "bloom_strength"
+name = "Bloom Strength"
+type = "float"
+min = 0.0
+max = 0.5
+step = 0.025
+default = 0.07
+
+[[options]]
+id = "post_exposure"
+name = "Exposure"
+type = "float"
+min = 0.5
+max = 1.6
+step = 0.05
+default = 1.0
+
+[[options]]
+id = "color_warmth"
+name = "Sky Warmth"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.45
+
+[[options]]
+id = "color_style"
+name = "Color Studio Preset"
+type = "choice"
+values = ["RealLife", "Golden Cinema", "Vibrant Fantasy", "Teal & Orange", "Dark Fantasy", "Dreamcore", "Arctic Blue", "Apocalypse", "Emerald Night", "Muted Film"]
+default = "RealLife"
+
+[[options]]
+id = "color_saturation"
+name = "Color Saturation"
+type = "float"
+min = 0.5
+max = 1.6
+step = 0.05
+default = 1.0
+
+[[options]]
+id = "color_contrast"
+name = "Color Contrast"
+type = "float"
+min = 0.7
+max = 1.4
+step = 0.05
+default = 1.03
+
+[[options]]
+id = "color_vibrance"
+name = "Color Vibrance"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.12
+
+[[options]]
+id = "color_temperature"
+name = "White Balance Temperature"
+type = "float"
+min = -1.0
+max = 1.0
+step = 0.05
+default = 0.0
+
+[[options]]
+id = "color_tint"
+name = "White Balance Tint"
+type = "float"
+min = -1.0
+max = 1.0
+step = 0.05
+default = 0.0
+
+[[options]]
+id = "adaptive_color"
+name = "Adaptive Daylight Color"
+type = "bool"
+default = true
+
+[[options]]
+id = "shadow_color_style"
+name = "Shadow Color Tone"
+type = "choice"
+values = ["Natural", "Warm Amber", "Cool Blue", "Teal", "Violet", "Crimson"]
+default = "Natural"
+
+[[options]]
+id = "shadow_color_strength"
+name = "Colored Shadow Strength"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.22
+
+[[options]]
+id = "rain_reflection_strength"
+name = "Rain Reflection Strength"
+type = "float"
+min = 0.0
+max = 0.5
+step = 0.025
+default = 0.24
+
+[[options]]
+id = "rain_droplet_strength"
+name = "Surface Droplet Highlights"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.45
+
+[[options]]
+id = "rain_droplet_scale"
+name = "Droplet Density"
+type = "float"
+min = 0.4
+max = 3.0
+step = 0.1
+default = 1.2
+
+[[options]]
+id = "godrays_smoothing"
+name = "Ray Smoothing"
+type = "float"
+min = 0.0
+max = 1.0
+step = 0.05
+default = 0.75
+
+# Settings pages (API 0.1-compatible layout)
+[[pages]]
+id = "main"
+name = "BedrockRTX Settings"
+items = ["page:lighting", "page:colored_lighting", "page:reflections", "page:water", "page:godrays", "page:aurora", "page:color"]
+
+[[pages]]
+id = "lighting"
+name = "Lighting & Shadows"
+columns = 1
+items = ["shadow_enabled", "shadow_resolution", "shadow_distance", "shadow_strength", "shadow_softness", "shadow_color_style", "shadow_color_strength", "ambient_gi", "day_brightness", "ambient_brightness"]
+
+[[pages]]
+id = "colored_lighting"
+name = "Colored & Dynamic Lighting"
+columns = 1
+items = ["colored_glass_lighting", "glass_light_strength", "dynamic_light_strength"]
+
+[[pages]]
+id = "reflections"
+name = "Reflections"
+columns = 1
+items = ["reflections_enabled", "block_reflections", "reflection_mode", "block_reflection_strength", "wet_reflection_strength", "wet_reflection_roughness", "page:all_block_reflections", "page:wet_surfaces"]
+
+[[pages]]
+id = "all_block_reflections"
+name = "All Block Reflections"
+columns = 1
+items = ["all_block_strength", "all_block_roughness", "block_reflection_quality", "block_reflection_distance", "reflection_thickness", "reflection_edge_fade"]
+
+[[pages]]
+id = "wet_surfaces"
+name = "Wet Surfaces"
+columns = 1
+items = ["wet_reflection_strength", "wet_reflection_roughness", "rain_reflection_strength", "rain_droplet_strength", "rain_droplet_scale"]
+
+[[pages]]
+id = "water"
+name = "Water"
+columns = 1
+items = ["water_texture_enabled", "water_reflections", "water_reflection_strength", "water_distortion", "water_waves", "water_wave_height", "water_wave_speed", "water_wave_scale"]
+
+[[pages]]
+id = "godrays"
+name = "Godrays"
+columns = 1
+items = ["godrays_enabled", "godrays_intensity", "godrays_count", "godrays_length", "godrays_quality", "godrays_smoothing"]
+
+[[pages]]
+id = "aurora"
+name = "Night Sky & Aurora"
+columns = 1
+items = ["night_stars", "night_aurora", "aurora_style", "aurora_palette", "aurora_brightness", "aurora_speed", "aurora_scale", "aurora_height", "aurora_width", "aurora_detail"]
+
+[[pages]]
+id = "color"
+name = "Color Studio"
+columns = 1
+items = ["color_style", "color_saturation", "color_contrast", "color_vibrance", "color_temperature", "color_tint", "adaptive_color", "bloom_strength", "color_warmth", "post_exposure"]
