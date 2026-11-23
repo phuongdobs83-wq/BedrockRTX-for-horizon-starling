@@ -4,11 +4,15 @@ An RTX-inspired shader pack made for **Horizon on Android**.
 Version **0.2.0**.
 
 ## Features
-- Shadows cast by trees and structures
-- Translucent glass and dyed glass you can see through
-- Warm light from lanterns and other light sources, with moody night forests
-- Darker, heavier atmosphere during rain and storms
-- Built for phones: roughly 30–40 FPS in my tests
+- Water reflections
+- Real-time shadows that follow the time of day
+- Colored shadows
+- Godrays
+- Dynamic lighting
+- Aurora
+- Translucent and tinted glass
+- Darker, heavier rain and storm atmosphere
+- Built for phones: roughly 30–40 FPS in my tests on Glaxy Tab S7 FE
 
 ## Installation
 1. Download the latest release (`BedrockRTX-0.2.0.zip`).
